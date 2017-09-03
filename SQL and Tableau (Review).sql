@@ -48,13 +48,15 @@ WHERE planes.year = 2009
 ORDER BY  air_time desc limit 3;
 
 # Part 2 - Tableau Comparison
-
 # What airport had the highest departure delay in 2013 grouped by aircraft manufacturer. 
-SELECT origin AS 'Airport', flights.year, flights.dep_delay, planes.manufacturer
+SELECT flights.origin AS 'Flights_Delayed', flights.dep_delay, flights.carrier, flights.tailnum, planes.manufacturer
+INTO OUTFILE 'C:/ProgramData/MySQL/MySQL Server 5.7/Uploads/.csv'
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
 FROM flights
 INNER JOIN planes
 ON flights.tailnum = planes.tailnum
 WHERE planes.year = 2009
-ORDER BY dep_delay desc limit 20;
-
+ORDER BY dep_delay DESC LIMIT 20;
 
